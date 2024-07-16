@@ -1,6 +1,7 @@
 //package imports
 // const express = require("express")
 import express from 'express'
+import "express-async-error"
 import dotenv from 'dotenv'
 import colors from 'colors'
 import cors from 'cors'
@@ -11,6 +12,7 @@ import connectDB from './config/db.js'
 //import routes
 import testRoutes from './routes/testRoutes.js'
 import authRoutes from './routes/authRoutes.js'
+import errorMiddleware from './middleware/errorMiddleware.mjs'
 
 dotenv.config()
 
@@ -26,8 +28,15 @@ app.use(morgan("dev"))
 // app.get("/",(req,res)=>{
 //     res.send("Hello")
 // })
+
+app.get('/', (req, res) => {
+    res.send('Server is running');
+});
+
 app.use("/api/v1/test", testRoutes)
 app.use("/api/v1/auth", authRoutes)
+
+app.use(errorMiddleware)
 
 const PORT = process.env.PORT || 8080
 
