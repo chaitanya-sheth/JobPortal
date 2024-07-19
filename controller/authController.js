@@ -41,3 +41,32 @@ export const registerController = async (req, res, next) => {
   }
 };
 
+export const loginController = async (req,res,next) => {
+
+  const {email,password} = req.body;
+
+  if(!email || !password){
+    return next("Invalid username or password")
+  }
+
+  const user = await userModel.findOne({email}).select("+password")
+  if(!user){
+    return next("User not found")
+  }
+
+  const isMatch = await user.comparePassword(password)
+  console.log(password)
+
+  if(!isMatch){
+    return next("Invalid credentials")
+  }
+  user.password = undefined
+  const token = user.createJWT()
+  res.status(200).json({
+    success:true,
+    message: "Login Successfully",
+    user,
+    token
+  })
+}
+
