@@ -13,6 +13,7 @@ import connectDB from './config/db.js'
 import testRoutes from './routes/testRoutes.js'
 import authRoutes from './routes/authRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import jobsRoutes from './routes/jobsRoutes.js'
 import errorMiddleware from './middleware/errorMiddleware.mjs'
 
 dotenv.config()
@@ -37,7 +38,7 @@ app.get('/', (req, res) => {
 app.use("/api/v1/test", testRoutes)
 app.use("/api/v1/auth", authRoutes)
 app.use("/api/v1/user",userRoutes)
-
+app.use("/api/v1/job",jobsRoutes)
 app.use(errorMiddleware)
 
 const PORT = process.env.PORT || 8080
