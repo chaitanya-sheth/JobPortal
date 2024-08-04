@@ -1,89 +1,64 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
+import InputForm from "../components/shared/InputForm";
 
 const Register = () => {
-
-  const [name,setName] = useState("");
-  const [lastName,setLastName] = useState("");
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState(""); 
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    try{
-      e.preventDefault()
-      console.log(name,lastName,email,password)
+    try {
+      e.preventDefault();
+      console.log(name, lastName, email, password);
+    } catch (error) {
+      console.log(error);
     }
-    catch(error){
-      console.log(error)
-    }
-    
-  }
+  };
   return (
     <>
-    <div className="form-container">
-      <form className="card p-4" onSubmit={handleSubmit}>
-      <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            name="name"
+      <div className="form-container">
+        <form className="card p-4" onSubmit={handleSubmit}>
+          <InputForm
+            htmlFor="name"
+            labelText={"Name"}
+            inputType={"text"}
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            handleChange={(e) => setName(e.target.value)}
+            name="name"
           />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="lastName" className="form-label">
-            Last Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            name="lastName"
+
+          <InputForm
+            htmlFor="lastName"
+            labelText={"Last name"}
+            inputType={"text"}
             value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            handleChange={(e) => setLastName(e.target.value)}
+            name="lastName"
           />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            name="email"
+
+          <InputForm
+            htmlFor="email"
+            labelText={"Email"}
+            inputType={"email"}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            handleChange={(e) => setEmail(e.target.value)}
+            name="email"
           />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
+
+          <InputForm
+            htmlFor="password"
+            labelText={"Password"}
+            inputType={"password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            handleChange={(e) => setPassword(e.target.value)}
+            name="password"
           />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="location" className="form-label">
-            Location
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            name="location"
-          />
-        </div>
-        
-        <button type="submit" className="btn btn-primary">
-          Register
-        </button>
-      </form>
+
+          <button type="submit" className="btn btn-primary">
+            Register
+          </button>
+        </form>
       </div>
     </>
   );
