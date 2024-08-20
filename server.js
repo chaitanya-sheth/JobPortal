@@ -28,7 +28,7 @@ connectDB()
 
 //rest object
 const app = express()
-
+// app.set('trust proxy', true);
 //middleware
 app.use(helmet())
 app.use(xss())

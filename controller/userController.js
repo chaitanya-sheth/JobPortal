@@ -23,3 +23,32 @@ export const updateUserController = async (req,res,next) => {
     })
 }
 
+//get user data
+export const getUserController = async (req,res) =>{
+    try{
+
+        const user = await userModel.findById({_id:req.body.user.userId})
+        user.password = undefined
+        if(!user){
+            return res.status(200).send({
+                message:'User not found',
+                success:false
+            })
+        }
+        else{
+            res.status(200).send({
+                success:true,
+                data:user,
+            })
+            
+        }
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).send({
+            message:'auth error',
+            success:false,
+            error:error.message
+        })
+    }
+}   
